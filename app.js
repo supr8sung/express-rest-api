@@ -6,12 +6,10 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-
+var pingRouter = require("./routes/ping");
 var app = express();
 
 // view engine setup
-app.listen(4200, "127.0.0.1");
-
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
@@ -23,6 +21,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/ping", pingRouter);
+app.use("/organisations", require("./routes/organisation"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
